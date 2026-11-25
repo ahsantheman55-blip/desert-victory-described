@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desert Victory Described</title>
+  <style>
+    :root {
+      --bg: #11150f;
+      --ink: #f3efdf;
+      --muted: #c9c2a8;
+      --accent: #e8c36a;
+      --btn: #2a3324;
+      --btn-ink: #f3efdf;
+      --btn-edge: #e8c36a;
+      --live: #d9f0c0;
+      --focus: #fff4b0;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.15rem;
+      line-height: 1.5;
+    }
+    body { max-width: 44rem; margin: 0 auto; padding: 1rem 1.1rem 4rem; }
+    h1, h2 { font-weight: 700; line-height: 1.25; }
+    h1 { font-size: 2rem; margin: 0.2rem 0 0.8rem; }
+    h2 { font-size: 1.35rem; margin: 1.8rem 0 0.7rem; color: var(--accent); }
+    p, li { max-width: 40rem; }
+    a { color: var(--accent); }
+    a:focus, button:focus, input:focus, select:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+    .clock {
+      font-size: 1.8rem;
+      letter-spacing: 0.04em;
+      background: #000;
+      color: var(--live);
+      padding: 0.6rem 0.8rem;
+      margin: 0.8rem 0 1rem;
+    }
+    .now {
+      min-height: 3.5rem;
+      background: #1b2218;
+      border-left: 4px solid var(--accent);
+      padding: 0.7rem 0.8rem;
+      margin: 0 0 1.2rem;
+    }
+    .row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0.6rem 0 1rem; }
+    button, .file-link {
+      font: inherit;
+      font-size: 1.15rem;
+      color: var(--btn-ink);
+      background: var(--btn);
+      border: 2px solid var(--btn-edge);
+      padding: 0.85rem 1rem;
+      min-height: 3.1rem;
+      min-width: 8.5rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+    }
+    button#start { min-width: 100%; font-size: 1.35rem; background: #3d4a30; }
+    button[aria-pressed="true"] { background: #4a5a28; }
+    button:disabled { opacity: 0.55; cursor: not-allowed; }
+    label { display: block; margin: 0.85rem 0 0.3rem; }
+    input[type="text"], select, input[type="number"] {
+      font: inherit;
+      font-size: 1.15rem;
+      padding: 0.6rem 0.7rem;
+      width: 100%;
+      max-width: 20rem;
+      background: #1b2218;
+      color: var(--ink);
+      border: 2px solid var(--btn-edge);
+    }
+    fieldset {
+      border: 2px solid #4a5340;
+      margin: 1rem 0;
+      padding: 0.6rem 0.8rem 1rem;
+    }
+    legend { color: var(--accent); padding: 0 0.3rem; }
+    .muted { color: var(--muted); }
+    ul.plain { list-style: none; padding: 0; margin: 0; }
+    ul.plain li { margin: 0.6rem 0; }
+    .cue-list { list-style: none; padding: 0; margin: 0; }
+    .cue-list li { margin: 0 0 0.9rem; padding: 0.5rem 0; border-bottom: 1px solid #2c3328; }
+    .tag { color: var(--accent); }
+    #status { margin: 0.3rem 0 0.8rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Desert Victory Described</h1>
+    <p>A spoken companion for the 1943 British official film <cite>Desert Victory</cite>, about the Second Battle of El Alamein and the pursuit across the desert. You play the film in another tab. This page speaks short descriptions in the gaps in the commentary, and, if you wish, notes from a time-travelling officer of the 1780s.</p>
+
+    <h2>Before you start</h2>
+    <p>This companion is timed to one exact copy: the public-domain file <span class="muted">DesertVictory.mp4</span> on the Internet Archive, which runs <strong>1 hour 10 minutes 29.5 seconds</strong>. That copy includes the film itself, which ends at about 1 hour 1 minute with the credits, and then a short American official newsreel, Film Bulletin number 47, about attacks in the Aleutian Islands. Please play that Archive copy, not the shorter Imperial War Museums stream, or the timings will drift.</p>
+    <ul class="plain">
+      <li><a class="file-link" href="https://archive.org/details/DesertVictory" target="_blank" rel="noopener">Open the film on the Internet Archive (new tab)</a></li>
+      <li><a class="file-link" href="https://www.iwm.org.uk/collections/item/object/1060007313" target="_blank" rel="noopener">Open the Imperial War Museums page (new tab, different length — do not use for timing)</a></li>
+    </ul>
+    <p>When the film is ready, come back here and tap Start at the same moment the picture begins, on the title <cite>Desert Victory</cite>. You can then nudge the clock if you are early or late. This page cannot hear the film, and it cannot lower the film’s sound while it speaks.</p>
+
+    <h2>Clock</h2>
+    <p id="status" role="status">The clock is stopped. Tap Start when the film begins.</p>
+    <p class="clock" aria-live="polite" id="clock">0:00:00.0</p>
+    <p class="now" aria-live="polite" id="now">Nothing is being spoken yet.</p>
+
+    <div class="row">
+      <button type="button" id="start">Start, from the beginning</button>
+    </div>
+    <div class="row">
+      <button type="button" id="pause" disabled>Pause</button>
+      <button type="button" id="resume" disabled>Resume</button>
+      <button type="button" id="back">Back 5 seconds</button>
+      <button type="button" id="forward">Forward 5 seconds</button>
+    </div>
+    <div class="row">
+      <button type="button" id="earlier">Nudge timing earlier by 1 second</button>
+      <button type="button" id="later">Nudge timing later by 1 second</button>
+    </div>
+    <form id="jump-form">
+      <label for="jump">Jump to a time, as minutes and seconds, for example 25:40</label>
+      <div class="row">
+        <input type="text" id="jump" name="jump" inputmode="numeric" autocomplete="off" placeholder="25:40">
+        <button type="submit" id="jump-go">Jump</button>
+      </div>
+    </form>
+
+    <h2>Voice and options</h2>
+    <fieldset>
+      <legend>What to speak</legend>
+      <p>
+        <button type="button" id="tog-desc" aria-pressed="true">Descriptions on</button>
+        <button type="button" id="tog-notes" aria-pressed="true">Historian’s notes on</button>
+      </p>
+      <p class="muted">Descriptions tell you what is on the screen in the gaps in the commentary. The notes, spoken in the voice of Captain Henry Ashcombe, an English officer and scholar of 1786, explain the real history of El Alamein and the pursuit, and say when a scene was reconstructed in a studio.</p>
+    </fieldset>
+    <label for="voice">Voice</label>
+    <select id="voice"><option value="">Default system voice</option></select>
+    <label for="rate">Speech rate</label>
+    <select id="rate">
+      <option value="0.8">Slow</option>
+      <option value="1" selected>Normal</option>
+      <option value="1.15">A little quicker</option>
+      <option value="1.3">Quick</option>
+    </select>
+    <p>
+      <button type="button" id="wake" aria-pressed="false">Keep the screen awake: off</button>
+    </p>
+    <p class="muted">On a phone, keeping the screen awake may help the speech continue. It is not certain, and this app has not been tested on an iPhone or with VoiceOver. Speech may stop if the phone locks or the tab is sent to the background.</p>
+
+    <h2>Read all cues as text</h2>
+    <p>A full list of the spoken descriptions and notes, with times, for reading or for a braille display. Times are measured from the start of the Archive copy.</p>
+    <ol class="cue-list" id="cue-list"></ol>
+
+    <h2>About this copy</h2>
+    <p>Timed to the Internet Archive item <a href="https://archive.org/details/DesertVictory" target="_blank" rel="noopener">DesertVictory</a>, file DesertVictory.mp4, running 1 hour 10 minutes 29.5 seconds (exactly 4229.5 seconds). The film <cite>Desert Victory</cite> itself, a Crown copyright work of 1943 whose term has expired, ends at about 1 hour 1 minute 7 seconds. The remaining minutes are a later American official newsreel, Film Bulletin number 47, marked Restricted on its end card, which happened to be joined to this file.</p>
+    <p>Commentary is spoken by Leo Genn, from a text by J. L. Hodson. The music is by William Alwyn. Four British Army cameramen were killed in the making of the film. Some close pictures of the night attack were reconstructed at Pinewood; the gun flashes of the barrage itself are genuine. This companion does not replace the film’s own commentary, and it cannot duck that sound from another tab.</p>
+  </main>
+  <script src="cues.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
